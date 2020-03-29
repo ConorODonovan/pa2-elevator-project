@@ -11,15 +11,18 @@ class Building:
     # Getter for floors value
     @property
     def floors(self):
+        """Returns number of floors of Building instance"""
         return self._floors
 
     # Setter for floors value
     @floors.setter
     def floors(self, new_value):
+        """Allows user to change the number of floors to new_value"""
         self._floors = new_value
 
     # Create elevator
     def create_elevator(self):
-        elevator_start_floor = random.randint(0, self._floors)
+        """Creates an instance of Elevator"""
+        elevator_start_floor = random.randint(1, self._floors)
         elevator = Elevator(elevator_start_floor, self._floors)
         return elevator
