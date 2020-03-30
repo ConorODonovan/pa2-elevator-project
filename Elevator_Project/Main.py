@@ -1,6 +1,4 @@
 from Building import Building
-from Customer import Customer
-import random
 
 if __name__ == "__main__":
 
@@ -8,9 +6,6 @@ if __name__ == "__main__":
     num_floors = 0
     num_customers_entered = False
     num_customers = 0
-    customers_waiting = []
-    customers_in_elevator = []
-    customers_on_correct_floor = []
 
     # User entering number of floors
     while not floors_entered:
@@ -49,68 +44,35 @@ if __name__ == "__main__":
     # Create building
     building = Building(num_floors)
     elevator = building.create_elevator()
-
-    # Create customers and add to waiting list
-    for i in range(num_customers):
-        customer = Customer(random.randint(1, num_floors), random.randint(1, num_floors))
-
-        # For testing
-        print(customer)
-
-        customers_waiting.append(customer)
+    building.create_customers(num_customers)
+    print("sdfgjhklsdhgkl: {}".format(building.customers_waiting))
 
     # Primary loop for checking customers and moving elevator
     while True:
-        if len(customers_waiting) == 0 and len(customers_in_elevator) == 0:
+        if len(building.customers_waiting) == 0 and len(elevator.customers_in_elevator) == 0:
             print("All customers arrived!")
             break
 
         # Check customers waiting and move them into elevator
-        for i in customers_waiting:
+        for i in building.customers_waiting:
             if i.start_floor == elevator.current_floor:
-                customers_waiting.remove(i)
-                customers_in_elevator.append(i)
+                building.customers_waiting.remove(i)
+                elevator.enter(i)
 
         # Check customers in elevator and move them onto correct floor
-        for i in customers_in_elevator:
+        for i in elevator.customers_in_elevator:
             if i.destination_floor == elevator.current_floor:
-                customers_in_elevator.remove(i)
-                customers_on_correct_floor.append(i)
+                elevator.exit(i)
+                building.customers_arrived.append(i)
 
         # For testing
         print("Current floor: {}".format(elevator.current_floor))
-        print("Customers waiting: {}".format(customers_waiting))
-        print("Customers in elevator: {}".format(customers_in_elevator))
-        print("Customers arrived: {}".format(customers_on_correct_floor))
+        print("Customers waiting: {}".format(building.customers_waiting))
+        print("Customers in elevator: {}".format(elevator.customers_in_elevator))
+        print("Customers arrived: {}".format(building.customers_arrived))
 
         elevator.move()
 
     # Testing stuff
     print("Number of floors: {}".format(building.floors))
     print("Number of customers: {}".format(num_customers))
-
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-    # elevator.move()
-    # print("Elevator current floor: {}".format(elevator.current_floor))
-
-    # for i in customers_waiting:
-    #     print("Customer start floor: {}".format(i.start_floor))
-    #     print("Customer destination floor: {}".format(i.destination_floor))

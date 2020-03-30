@@ -4,7 +4,6 @@ class Elevator:
         self._current_floor = current_floor
         self._total_floors = total_floors
         self._move_direction = 1
-        self._customers_in_elevator = []
 
     # Getter for current_floor value
     @property
@@ -35,16 +34,6 @@ class Elevator:
     def total_floors(self):
         """Returns the total number of floors in the building"""
         return self._total_floors
-
-    @property
-    def customers_in_elevator(self):
-        return self._customers_in_elevator
-
-    def enter(self, customer):
-        self._customers_in_elevator.append(customer)
-
-    def exit(self, customer):
-        self._customers_in_elevator.remove(customer)
 
     def move(self):
         """Moves the elevator - it will move up until it reaches the top floor,
