@@ -10,6 +10,9 @@ class Building:
         self._customers_waiting = []
         self._customers_arrived = []
 
+    def __str__(self):
+        return "Building with {} floors".format(self.floors)
+
     @property
     def floors(self):
         """Returns number of floors of Building instance"""
@@ -22,10 +25,12 @@ class Building:
 
     @property
     def customers_waiting(self):
+        """Returns list of customers currently waiting for elevator"""
         return self._customers_waiting
 
     @property
     def customers_arrived(self):
+        """Returns list of customers that have arrived at their floor"""
         return self._customers_arrived
 
     # Create elevator
@@ -36,7 +41,7 @@ class Building:
         return elevator
 
     def create_customers(self, num_customers):
-        # Create customers and add to waiting list
+        """Creates the specified number of customers and adds them to the customers_waiting list"""
         for i in range(num_customers):
             customer = Customer(random.randint(1, self.floors), random.randint(1, self.floors))
 

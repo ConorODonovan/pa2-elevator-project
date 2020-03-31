@@ -6,6 +6,9 @@ class Elevator:
         self._move_direction = 1
         self._customers_in_elevator = []
 
+    def __str__(self):
+        return "Elevator, currently on floor {}".format(self.current_floor)
+
     # Getter for current_floor value
     @property
     def current_floor(self):
